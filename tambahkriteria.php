@@ -15,7 +15,7 @@ if (isset($_POST["submit"])) {
     $nilai = htmlspecialchars($_POST["nilai"]);
 
     // query insert data
-    $query = "INSERT INTO kriteria VALUES ('','$kode_aspek','$kode_kriteria','$jenis','$deskripsi','$nilai')";
+    $query = "INSERT INTO kriteria VALUES ('','$kode_aspek','$kode_kriteria','$deskripsi','$jenis','$nilai')";
     mysqli_query($con, $query);
 
     //alert

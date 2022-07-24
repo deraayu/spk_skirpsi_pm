@@ -75,8 +75,6 @@ if (isset($_POST["login"])) {
                                     </div>
 
 
-
-
                                     <form class="" method="POST" action="">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" id="username" name="username" placeholder="Enter Username..." value="" required>

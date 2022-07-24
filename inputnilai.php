@@ -14,7 +14,7 @@ include 'topbar.php';
 ?>
 
 <html>
-<script type="text/javascript">
+<!--<script type="text/javascript">
     function inputNilai(x) {
         if (x == "4") {
             window.location = 'inputnilai_sikap.php';
@@ -30,11 +30,11 @@ include 'topbar.php';
             }
         }
     }
-</script>
+</script> -->
 
 <div class="row col-sm-6">
     <div class="col-sm-9">
-        <form class="spasiAtas">
+        <form class="spasiAtas" method="POST" action="coba.php">
             <div class="form-group">
                 <h4><i class="fas fa-plus fa-sm mb-3"></i> INPUT NILAI PRAKERIN</h4>
                 <select name="id_aspek" class="form-control">
@@ -57,7 +57,8 @@ include 'topbar.php';
             <table class="table table-striped" id="inputNilaiProfile">
 
             </table>
-            <button type="submit" class="btn btn-primary">Simpan</button>
+            <!--<button type="submit" class="btn btn-primary" name="cari">Cari</button> -->
+            <input type="submit" name="cari">
         </form>
     </div>
     <!--end div class=col-6-->
