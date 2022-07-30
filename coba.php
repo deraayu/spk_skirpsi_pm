@@ -12,15 +12,16 @@ include 'header.php';
 include 'sidebar.php';
 include 'topbar.php';
 
+$nilai = [];
 
 
 if (isset($_POST["cari"])) {
 
 
-    $id = $_POST['id_aspek'];
-    $query = "SELECT * FROM kriteria WHERE id_aspek = " . $id;
+    $id1 = $_POST['id_aspek'];
+    $query1 = "SELECT * FROM kriteria WHERE id_aspek = " . $id1;
 
-    $result = mysqli_query($con, $query);
+    $result1 = mysqli_query($con, $query1);
 
     // while ($data = mysqli_fetch_array($result)) {
     //     echo $data['id_aspek'];
@@ -32,9 +33,9 @@ if (isset($_POST["cari"])) {
 <html>
 <div class="row col-sm-6">
     <div class="col-sm-9">
-        <form class="spasiAtas" method="POST" action="coba.php">
-            <div class="form-group">
-                <table class=" table-bordered table-hover table-striped disable">
+        <form class="spasiAtas " method="POST" action="coba.php">
+            <div class=" container-fluid">
+                <table class=" table table-bordered table-hover table-striped ">
                     <tr>
 
                         <td>Nama Siswa</td>
@@ -42,77 +43,91 @@ if (isset($_POST["cari"])) {
                         if (isset($_POST["cari"])) {
 
 
-                            $id = $_POST['id_aspek'];
-                            $query = "SELECT * FROM kriteria WHERE id_aspek = " . $id;
+                            $id2 = $_POST['id_aspek'];
+                            $query2 = "SELECT * FROM kriteria WHERE id_aspek = " . $id2;
 
-                            $result = mysqli_query($con, $query);
+                            $result2 = mysqli_query($con, $query2);
 
-                            while ($data = mysqli_fetch_array($result)) {
+                            while ($data2 = mysqli_fetch_array($result2)) {
                         ?>
-                                <td><?php echo $data['deskripsi'] ?></td>
+                                <td><?php echo $data2['deskripsi'] ?></td>
+                                <input type="hidden" name="id_kriteria" value="<?php echo $data2['id_kriteria'] ?>">
 
+                                <?php
+
+                                $jml = count($data2);
+                                $nilai[] = $data2['id_kriteria']; ?>
                         <?php }
                         } ?>
                     </tr>
-                    <?php
-                    $query2 = "SELECT * FROM siswa";
-                    $result = mysqli_query($con, $query2);
-                    while ($data = mysqli_fetch_array($result)) {
 
-                    ?>
-                        <tr>
+                    <tr>
 
 
+                        <td>
+
+                            <input type="hidden" style="width: 80px" name="id_siswa" value="<?php echo $data3['id_siswa'] ?>" placeholder="<?php echo $data3['id_siswa'] ?>">
+                            <select name="nama_siswa">
+                                <?php
+                                $query3 = "SELECT * FROM siswa";
+                                $result3 = mysqli_query($con, $query3);
+                                while ($data3 = mysqli_fetch_array($result3)) {
+
+                                ?>
+                                    <option value="id_siswa"><?php echo $data3['Nama'] ?></option>
+                                <?php } ?>
+                            </select>
+
+
+
+                        </td>
+                        <?php
+                        $id4 = $_POST['id_aspek'];
+                        $query4 = "SELECT * FROM kriteria WHERE id_aspek = " . $id4;
+
+                        $result4 = mysqli_query($con, $query4);
+
+                        while ($data4 = mysqli_fetch_array($result4)) {
+
+
+
+                        ?>
                             <td>
-                                <!-- <input type="text" style="width: 80px" name="NISN" id="nilai_cf_A1" readonly> -->
-                                <input type="text" style="width: 80px" name="Nama" value="<?php echo $data['Nama'] ?>" placeholder="<?php echo $data['Nama'] ?>">
+                                <select name="value">
+
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+
+                                </select>
+
                             </td>
-
-                            <?php
-                            $id = $_POST['id_aspek'];
-                            $query = "SELECT * FROM kriteria WHERE id_aspek = " . $id;
-
-                            $result = mysqli_query($con, $query);
-
-                            while ($data = mysqli_fetch_array($result)) {
+                        <?php } ?>
 
 
 
-                            ?>
-                                <td>
-                                    <!-- <select class="custom-select d-block w-100" name="<?php echo $row['id_pelamar'] ?>_A8">
-                                    <option value="1" <?php echo $row['A8'] == 1 ? "selected=selected" : ""; ?>>1 - Kurang</option>
-                                    <option value="2" <?php echo $row['A8'] == 2 ? "selected=selected" : ""; ?>>2 - Cukup</option>
-                                    <option value="3" <?php echo $row['A8'] == 3 ? "selected=selected" : ""; ?>>3 - Baik</option>
-                                    <option value="4" <?php echo $row['A8'] == 4 ? "selected=selected" : ""; ?>>4 - Sangat Baik</option>
-                                </select> -->
+                    </tr>
 
-                                    <select name="" id="">
-
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-
-                                    </select>
-
-                                </td>
-                            <?php } ?>
-
-                        </tr>
-                    <?php } ?>
                 </table>
 
             </div>
 
-
+            <input type="text" name="nilai" value="nilai[]">
 
             <!--<button type="submit" class="btn btn-primary" name="cari">Cari</button> -->
-            <input type="submit" name="cari">
+            <input type="submit" name="simpan">
         </form>
     </div>
     <!--end div class=col-6-->
 </div>
 
 </html>
+
+<?php
+if (isset($_POST['simpan'])) {
+    var_dump($nilai);
+}
+
+?>
