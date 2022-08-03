@@ -33,7 +33,7 @@ if (isset($_POST["cari"])) {
 <html>
 <div class="row col-sm-6">
     <div class="col-sm-9">
-        <form class="spasiAtas " method="POST" action="coba.php">
+        <form class="spasiAtas " method="POST" action="tambah_action.php">
             <div class=" container-fluid">
                 <table class=" table table-bordered table-hover table-striped ">
                     <tr>
@@ -52,33 +52,25 @@ if (isset($_POST["cari"])) {
                         ?>
                                 <td><?php echo $data2['deskripsi'] ?></td>
                                 <input type="hidden" name="id_kriteria" value="<?php echo $data2['id_kriteria'] ?>">
-
-                                <?php
-
-                                $jml = count($data2);
-                                $nilai[] = $data2['id_kriteria']; ?>
                         <?php }
                         } ?>
                     </tr>
 
+                    <?php 
+                        $query3 = "SELECT * FROM siswa";
+
+                        $result3 = mysqli_query($con, $query3);
+
+                        while ($data3 = mysqli_fetch_array($result3)) {
+                    ?>
+
                     <tr>
-
-
                         <td>
-
                             <input type="hidden" style="width: 80px" name="id_siswa" value="<?php echo $data3['id_siswa'] ?>" placeholder="<?php echo $data3['id_siswa'] ?>">
-                            <select name="nama_siswa">
-                                <?php
-                                $query3 = "SELECT * FROM siswa";
-                                $result3 = mysqli_query($con, $query3);
-                                while ($data3 = mysqli_fetch_array($result3)) {
 
-                                ?>
-                                    <option value="id_siswa"><?php echo $data3['Nama'] ?></option>
-                                <?php } ?>
-                            </select>
+                            <input type="text" name="nama_siswa" value='<?= $data3['Nama'] ?>'>
 
-
+                            <?php $jml = count($data3)?>
 
                         </td>
                         <?php
@@ -109,12 +101,12 @@ if (isset($_POST["cari"])) {
 
 
                     </tr>
+                    <?php } ?>
 
                 </table>
 
             </div>
 
-            <input type="text" name="nilai" value="nilai[]">
 
             <!--<button type="submit" class="btn btn-primary" name="cari">Cari</button> -->
             <input type="submit" name="simpan">
@@ -125,9 +117,3 @@ if (isset($_POST["cari"])) {
 
 </html>
 
-<?php
-if (isset($_POST['simpan'])) {
-    var_dump($nilai);
-}
-
-?>
